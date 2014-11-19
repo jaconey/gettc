@@ -1,21 +1,22 @@
 GETTC_HOME ?= $(HOME)/.gettc
-OUTPUT_D =../../build/cpp
 DATA_D = ../../data
 COMPILER = g++ -std=gnu++0x -I$(GETTC_HOME)/include/cpp
 RUNNER = sh ../../bin/runner.sh
+BIN_NAME = $(shell echo `find *Runner.cpp|cut -d "." -f 1`)
+OUTPUT_D =../../../build/cpp/$(BIN_NAME)
 
-run = $(RUNNER) $1 $(OUTPUT_D)/<%= prob.name %>Runner $(DATA_D)/$2 $(OUTPUT_D)/$2
+run = $(RUNNER) $1 $(OUTPUT_D)/$(BIN_NAME) $(DATA_D)/$2 $(OUTPUT_D)/$2
 
 default : usage
 
 usage :
 	@cat $(GETTC_HOME)/usage
 
-setup :
-	if [ ! -d $(OUTPUT_D) ]; then mkdir -p $(OUTPUT_D); fi
+$(OUTPUT_D):
+	mkdir -p $(OUTPUT_D)
 
-main : <%= prob.name %>Runner.cpp <%= prob.name %>.cpp setup
-	$(COMPILER) -o $(OUTPUT_D)/<%= prob.name %>Runner $<
+main : $(BIN_NAME).cpp $(OUTPUT_D)
+	$(COMPILER) -o $(OUTPUT_D)/$(BIN_NAME) $<
 
 demo : main
 	$(call run,verbose,demo) 
