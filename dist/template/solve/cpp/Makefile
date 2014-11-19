@@ -7,16 +7,14 @@ OUTPUT_D =../../../build/cpp/$(BIN_NAME)
 
 run = $(RUNNER) $1 $(OUTPUT_D)/$(BIN_NAME) $(DATA_D)/$2 $(OUTPUT_D)/$2
 
+.PHONY: default, usage, main, demo, sys, sysv, clean
+
 default : usage
 
 usage :
 	@cat $(GETTC_HOME)/usage
 
-$(OUTPUT_D):
-	mkdir -p $(OUTPUT_D)
-
-main : $(BIN_NAME).cpp $(OUTPUT_D)
-	$(COMPILER) -o $(OUTPUT_D)/$(BIN_NAME) $<
+main : $(OUTPUT_D)/$(BIN_NAME)   
 
 demo : main
 	$(call run,verbose,demo) 
@@ -29,3 +27,10 @@ sysv : main
 
 clean :
 	rm -rf $(OUTPUT_D)
+
+$(OUTPUT_D):
+	mkdir -p $(OUTPUT_D)
+
+$(OUTPUT_D)/$(BIN_NAME): $(BIN_NAME).cpp $(OUTPUT_D)
+	$(COMPILER) -o $(OUTPUT_D)/$(BIN_NAME) $<
+
