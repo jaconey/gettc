@@ -9,3 +9,4 @@ public:
         return <%= func.type.dumb_cpp %>;
     }
 };
+

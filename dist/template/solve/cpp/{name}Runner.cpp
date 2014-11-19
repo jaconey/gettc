@@ -1,6 +1,6 @@
 #include <fstream>
-#include <topcoder>
-#include "<%= prob.name %>.cpp"
+#include "topcoder.hpp"
+#include "<%= prob.name %>.hpp"
 namespace tc = TopCoder;
 <%
     engine = CppEngine.new func, vars
@@ -24,3 +24,4 @@ int main(int argc, char const *argv[]) {
     }
     return 0;
 }
+
