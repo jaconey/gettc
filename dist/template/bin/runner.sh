@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# Usage:
 # runner.sh mode /path/to/solver /path/to/input/dir /path/to/output/dir
 # mode = quiet|verbose|file
 
@@ -13,9 +16,8 @@ command_exists () {
 
 timeit () {
     if command_exists /usr/bin/time ; then
-        /usr/bin/time -o /dev/null echo "Testing availability of the time command" >/dev/null
         if [ $? -eq 0 ]; then
-            /usr/bin/time -o $ostream "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
+            /usr/bin/time "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9" > $ostream
             return
         fi
     elif [ $mode = 'verbose' ]; then

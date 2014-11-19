@@ -1,7 +1,7 @@
 GETTC_HOME ?= $(HOME)/.gettc
 DATA_D = ../../data
 COMPILER = g++ -std=gnu++0x -I$(GETTC_HOME)/include/cpp
-RUNNER = sh ../../bin/runner.sh
+RUNNER = bash ../../bin/runner.sh
 BIN_NAME = $(shell echo `find *Runner.cpp|cut -d "." -f 1`)
 OUTPUT_D =../../../build/cpp/$(BIN_NAME)
 
