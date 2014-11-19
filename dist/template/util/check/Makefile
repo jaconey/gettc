@@ -1,7 +1,17 @@
 GETTC_HOME ?= $(HOME)/.gettc
+BUILD_D = ../../../build
 
-default : check
+all: $(BUILD_D)/check
 
-check : check.cpp
-	if [ ! -d ../../build ]; then mkdir ../../build; fi
-	g++ -I$(GETTC_HOME)/include/cpp -o ../../build/$@ $<
+$(BUILD_D)/check: check.cpp 
+	# $(BUILD_D)
+	g++ -I$(GETTC_HOME)/include/cpp -o $@ $<
+
+$(BUILD_D):
+	mkdir -p $(BUILD_D)
+
+clean:
+	rm -rf $(BUILD_D)/check
+
+.PHONY: clean all
+

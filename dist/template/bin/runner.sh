@@ -66,7 +66,7 @@ init () {
     fi
 
     dir=`dirname $0`
-    checker="$dir/../build/check" 
+    checker="$dir/../../build/check" 
     if [ ! -x "$checker" ]; then
         undo=`pwd`
         cd "$dir/../util/check"
