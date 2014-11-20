@@ -41,13 +41,13 @@ module Gettc
         end
     end 
     class Generator
-        def initialize config_d, target_d
-            @source_d = File.join config_d, "template"
+        def initialize root_d, target_d
+            @source_d = File.join root_d, "dist/template"
             @target_d = target_d
             raise SourceDirNotExist.new @source_d unless File.directory? @source_d 
             raise TargetDirNotExist.new @target_d unless File.directory? @target_d
 
-            include_d = File.join config_d, "include"
+            include_d = File.join root_d, "dist/common/include"
             load_engines include_d
         end
         def generate prob

@@ -71,7 +71,7 @@ init () {
     checker="$dir/../../build/check" 
     if [ ! -x "$checker" ]; then
         undo=`pwd`
-        cd "$dir/../util/check"
+        cd "../../util/check"
         make
         cd "$undo"
     fi
