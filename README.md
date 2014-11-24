@@ -21,7 +21,7 @@ Therefore the following changes have been made:
 NOTE: Please feel free to grab it if you like. I'll keep trying to refine it. I'd 
 say modifications are all based on my BAD personal taste. I'll simplify some 
 features I don't like or won't use, given my poor knowleadge of Ruby. Even some 
-languages support is very likely to be removed in the near future. And, of course, 
+language support is very likely to be removed in the near future. And, of course, 
 NO intention to back-port to origin. 
 
 P.S. Below is the origin gettc README. It is generally correct, but some points may 
