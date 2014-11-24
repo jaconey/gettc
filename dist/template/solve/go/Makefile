@@ -1,29 +1,18 @@
-GETTC_HOME ?= <%= File.expand_path "~/.gettc" %>
-OUTPUT_D =../../build/go
-DATA_D = ../../data
-RUNNER = sh ../../bin/runner.sh
+BIN_NAME = <%= prob.name %>
+include ../../../common/Makefile
+OUTPUT_D =$(ROOT_D)/build/$(BIN_NAME)/go
 
-run = $(RUNNER) $1 $(OUTPUT_D)/<%= prob.name %>Runner $(DATA_D)/$2 $(OUTPUT_D)/$2
+run = $(RUNNER) $1 $2 $(OUTPUT_D) $(BIN_NAME) 
 
 default : usage
 
-usage :
-	@cat $(GETTC_HOME)/usage
+$(OUTPUT_D):
+	@mkdir -p $(OUTPUT_D)
 
-setup :
-	if [ ! -d $(OUTPUT_D) ]; then mkdir -p $(OUTPUT_D); fi
+main : $(OUTPUT_D)/$(BIN_NAME)   
 
-main : <%= prob.name %>Runner.go <%= prob.name %>/<%= prob.name %>.go setup
-	export GOPATH="$$GOPATH<%= File::PATH_SEPARATOR %>$(GETTC_HOME)/include/go" && go build -o $(OUTPUT_D)/<%= prob.name %>Runner <%= prob.name %>Runner.go 
-
-demo : main
-	$(call run,verbose,demo) 
-
-sys : main
-	$(call run,quiet,sys)
-
-sysv : main
-	$(call run,verbose,sys)
+$(OUTPUT_D)/$(BIN_NAME): $(BIN_NAME)Runner.go $(OUTPUT_D) $(BIN_NAME)/$(BIN_NAME).go 
+	export GOPATH="$$GOPATH:`pwd`/$(COMMON_D)/include/go" && go build -o $(OUTPUT_D)/$(BIN_NAME) $(BIN_NAME)Runner.go 
 
 clean :
 	rm -rf $(OUTPUT_D)

@@ -1,27 +1,21 @@
-GETTC_HOME ?= $(HOME)/.gettc
-OUTPUT_D = ../../build/python
-DATA_D = ../../data
-RUNNER = sh ../../bin/runner.sh
+BIN_NAME = <%= prob.name %>
+include ../../../common/Makefile
+OUTPUT_D =$(ROOT_D)/build/$(BIN_NAME)/python
 
-run = $(RUNNER) $1 ./<%= prob.name %>Runner.py $(DATA_D)/$2 $(OUTPUT_D)/$2
+run = $(RUNNER) $1 $2 $(OUTPUT_D) $(BIN_NAME)
 
 default : usage
 
-setup :
-	if [ ! -d $(OUTPUT_D) ]; then mkdir -p $(OUTPUT_D); fi
-	chmod +x <%= prob.name %>Runner.py
-
-usage :
-	@cat $(GETTC_HOME)/usage
-
-demo : setup
-	$(call run,verbose,demo) 
-
-sys : setup
-	$(call run,quiet,sys)
-
-sysv : setup
-	$(call run,verbose,sys)
+main : $(OUTPUT_D)/$(BIN_NAME)
 
 clean :
 	rm -rf $(OUTPUT_D)
+
+$(OUTPUT_D):
+	@mkdir -p $(OUTPUT_D)
+
+$(OUTPUT_D)/$(BIN_NAME): $(BIN_NAME).py $(BIN_NAME)Runner.py $(OUTPUT_D)
+	chmod +x $(BIN_NAME)Runner.py
+	cp $(BIN_NAME)Runner.py $(OUTPUT_D)/$(BIN_NAME)
+	cp $(BIN_NAME).py $(OUTPUT_D)/$(BIN_NAME).py
+

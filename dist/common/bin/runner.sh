@@ -5,9 +5,10 @@
 # mode = quiet|verbose|file
 
 mode="$1"
-solver="$2"
-data_d="$3"
-output_d="$4"
+prob_name=$4
+solver=$3/$4
+data_d=../../data/$2
+output_d=$3/$2
 ostream=/dev/null
 
 command_exists () {
@@ -68,13 +69,12 @@ init () {
     fi
 
     dir=`dirname $0`
-    checker="$dir/../../build/check" 
-    if [ ! -x "$checker" ]; then
-        undo=`pwd`
-        cd "../../util/check"
-        make
-        cd "$undo"
-    fi
+    #if [ ! -x "$checker" ]; then
+	undo=`pwd`
+	cd "../../util/check"
+	make
+	cd "$undo"
+    #fi
 } 
 
 main () {
@@ -95,6 +95,7 @@ main () {
 
             write "Check $test_case ... "
             timeit "$solver" "$data_d/$test_case.in" "$output_d/$test_case.out"
+			checker="$dir/../../build/"$prob_name"/check" 
             "$checker" "$data_d/$test_case.out" "$output_d/$test_case.out" > $ostream
             retcode=$?
 

@@ -1,4 +1,4 @@
-BUILD_D = ../../../build
+BUILD_D = ../../../build/<%= prob.name %>
 
 all: $(BUILD_D)/check
 

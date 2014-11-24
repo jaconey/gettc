@@ -3,18 +3,12 @@
 import os, sys
 import <%= prob.name %>
 
-def init():
-    default_path = os.path.join(os.getenv("HOME"), ".gettc")
-    gettc_home = os.path.abspath(os.getenv("GETTC_HOME", default_path))
-    include_dir = os.path.join(gettc_home, "include/python")
-    sys.path.append(include_dir)
-
 def main():
+    sys.path.append("../../../common/include/python")
     import topcoder as tc
     with open(sys.argv[1], "r") as fi:
         input = fi.read()
         reader = tc.Reader(input)
-    
 <%= engine.input.gsub(/^/, ' ' * 8) %>
 
     result = <%= prob.name %>.<%= func.name %>(<%= engine.arglist %>)
@@ -22,5 +16,4 @@ def main():
         fo.write(tc.write(result, "<%= func.type %>"))
 
 if __name__ == "__main__":
-    init()
     main()

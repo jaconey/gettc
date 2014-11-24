@@ -22,7 +22,6 @@ def main
     usage = <<-eos.strip
 gettc <id>: Generate a solution for the TopCoder problem with that ID, eg 11138.
 gettc version: Print version string.
-gettc reset: Force a reset of the contents in GETTC_HOME.
     eos
     if ARGV.empty?  
         puts usage 
