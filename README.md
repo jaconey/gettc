@@ -3,10 +3,10 @@
 Originally gettc doesn't support out-of-tree build. Few problems have been 
 observed. First of all, all output files were in the same folder as the problem, 
 which made output files cleanup tedious, especially when you have quite a big 
-bunch of files. Because runner.sh had multiple copies across problems, it is very 
-difficult to change it or to fix a bug for it. And there was no common file sharing 
-between problems, except the fancy hidden folder ‘.gettc’ which somehow made the 
-ability to run out-of-the-box so difficult, or, say, obscure. 
+bunch of files. It was very difficult to change a common file or to fix bug, for
+example, runner.sh had multiple copies amongst problems. There was no common 
+file sharing between problems, except the 'fancy' hidden mystery '.gettc', which 
+made it so difficult, or obscure, to run out-of-the-box.
 
 Therefore the following changes have been made:
 - Now we have a “common” folder to shares files, so runner.sh, common Makefile 
