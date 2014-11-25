@@ -18,7 +18,23 @@ Therefore the following changes have been made:
   you're ready to go. Nothing is hiding anymore. 
 - Bug fixes, such as errors on OS X, redundant code and etc.
 
-NOTE: Please feel free to grab it if you like. I'll keep trying to refine it. I'd 
+HOWTO batch download problems from TopCoder without installing gettc:
+---------
+ - Download the source code
+ - Install ruby and the required gems (hpricot and rdiscount) 
+ - Search your desired problems from [Problem Archive](http://community.topcoder.com/tc?module=ProblemArchive);
+ - Copy the PROBLEMS_URL from the browser;
+ - Make sure you're in the top level folder of the code, and run the following commands in shell:
+```
+    mkdir problem 
+    cd problem
+    curl PROBLEMS_URL |grep -o 'pm=[0-9]*'|uniq|cut -c 4-|
+      { while read id; do ruby -I../core/lib ../bin/gettc $id; done }
+```
+
+NOTE:
+
+Please feel free to grab it if you like. I'll keep trying to refine it. I'd 
 say modifications are all based on my BAD personal taste. I'll simplify some 
 features I don't like or won't use, given my poor knowleadge of Ruby. Even some 
 language support is very likely to be removed in the near future. And, of course, 
@@ -26,6 +42,7 @@ NO intention to back-port to origin.
 
 P.S. Below is the origin gettc README. It is generally correct, but some points may 
 not be accurate anymore.
+
 ----------
 Download a [TopCoder](http://topcoder.com/tc) problem, parse the examples and
 system tests, then finally generate a naive solution for the following languages:
