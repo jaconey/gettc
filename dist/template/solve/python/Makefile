@@ -15,7 +15,6 @@ $(OUTPUT_D):
 	@mkdir -p $(OUTPUT_D)
 
 $(OUTPUT_D)/$(BIN_NAME): $(BIN_NAME).py $(BIN_NAME)Runner.py $(OUTPUT_D)
-	chmod +x $(BIN_NAME)Runner.py
 	cp $(BIN_NAME)Runner.py $(OUTPUT_D)/$(BIN_NAME)
 	cp $(BIN_NAME).py $(OUTPUT_D)/$(BIN_NAME).py
-
+	chmod +x $(OUTPUT_D)/$(BIN_NAME)
